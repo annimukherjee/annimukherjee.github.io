@@ -1,0 +1,62 @@
+body {
+    background: #18191a;
+    color: #A9F190;
+    font-family: 'Fira Mono', 'Consolas', monospace;
+    margin: 0;
+    padding: 1.5rem;
+}
+.terminal {
+    background: rgba(0,0,0,0.92);
+    border-radius: 8px;
+    padding: 2rem;
+    max-width: 800px;
+    margin: 2rem auto;
+    box-shadow: 0 0 10px #000;
+}
+.ascii-art {
+    font-family: 'Fira Mono', monospace;
+    color: #FFD580;
+    font-size: 14px;
+    margin: 1em 0;
+    white-space: pre;
+    line-height: 1.2;
+}
+
+.ascii-art::after {
+    content: '█';
+    animation: blink 1s infinite;
+    color: #A9F190;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+.cmd {
+    color: #FFD580;
+}
+.links {
+    margin-top: 1.2em;
+}
+.links a {
+    color: #35A0FA;
+    text-decoration: underline;
+    margin-right: 0.5em;
+    font-family: inherit;
+}
+.links a:hover {
+    color: #FFD580;
+    transition: color 0.2s ease;
+}
+
+.links a {
+    transition: color 0.2s ease;
+}
+a {
+    color: #FFD580;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+    transition: all 0.2s ease;
+}

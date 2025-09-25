@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Anni's Getting You To READ :)</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Mono:400,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="terminal">
+        <!-- Terminal typing animation here -->
+        <pre id="type-anim" class="ascii-art"></pre>
+        
+        <!-- Links will appear after all typing is complete -->
+    </div>
+    <!-- Typing animation script -->
+    <script>
+    const asciiBlock = `
+aniruddha@world:~$ ./hello_world.sh
+
+##############################################################
+#                                                            #
+#                       [◕‿◕]✿                              #
+#                  hello, my name is                         #
+#            █████  ███    ██ ███    ██ ██                #
+#           ██   ██ ████   ██ ████   ██ ██                #
+#           ███████ ██ ██  ██ ██ ██  ██ ██                #
+#           ██   ██ ██  ██ ██ ██  ██ ██ ██                #
+#           ██   ██ ██   ████ ██   ████ ██                #
+#                                                            #
+#                    welcome to my world                     #
+#                                                            #
+##############################################################
+`;
+
+    const manifestoText = `
+aniruddha@world:~$ cat manifesto.txt
+
+Here's my manifesto: I want to make an impact, change the world
+for the better, advance our species, move our race forward, and
+impose my worldview—a view shaped by kindness, gratitude, love,
+and care. I want to uplift people around the world and save lives
+in healthcare. This is my guiding light, and my aim is to be an
+agent for good in this world.
+
+I'm also majoring in computer science, and I've had the
+opportunity to study and research at IISc, EPFL, CMU, BITS
+Pilani, DCS Research, and UT Austin.
+
+`;
+
+    const el = document.getElementById('type-anim');
+    let phase = 1; // 1 = ascii block, 2 = manifesto, 3 = redirect timer
+    let idx = 0;
+    let currentText = asciiBlock;
+
+    function typeWriter() {
+        if (idx < currentText.length) {
+            const char = currentText[idx];
+            if (char === '\n') {
+                el.innerHTML += '<br>';
+            } else {
+                el.innerHTML += char;
+            }
+            idx++;
+
+            // Fast speed for ASCII block, normal for manifesto
+            let delay = phase === 1 ? (Math.random() * 8 + 2) : (Math.random() * 15 + 8);
+            if (char === '.' || char === '!' || char === '?') delay += 200;
+            if (char === ',' || char === ';') delay += 100;
+            if (char === ' ') delay += 5;
+            if (char === '#' || char === '█') delay = phase === 1 ? 1 : 2;
+
+            setTimeout(typeWriter, delay);
+        } else {
+            if (phase === 1) {
+                // Start manifesto typing
+                phase = 2;
+                currentText = manifestoText;
+                idx = 0;
+                setTimeout(typeWriter, 1000);
+            } else if (phase === 2) {
+                // Start redirect countdown
+                phase = 3;
+                startRedirectCountdown();
+            }
+        }
+    }
+
+    function startRedirectCountdown() {
+        let countdown = 5;
+        const countdownEl = document.createElement('div');
+        countdownEl.style.cssText = `
+            color: #A9F190;
+            background: rgba(169, 241, 144, 0.1);
+            border: 2px solid #A9F190;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            animation: pulse 1s infinite;
+        `;
+        document.querySelector('.terminal').appendChild(countdownEl);
+
+        // Add CSS animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse {
+                0% { box-shadow: 0 0 5px rgba(169, 241, 144, 0.5); }
+                50% { box-shadow: 0 0 20px rgba(169, 241, 144, 0.8); }
+                100% { box-shadow: 0 0 5px rgba(169, 241, 144, 0.5); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        function updateCountdown() {
+            if (countdown > 0) {
+                countdownEl.innerHTML = `
+                    <div>🌟 This was just a quick hello! 🌟</div>
+                    <div style="margin-top: 0.5rem;">Redirecting to my professional website in <span style="color: #FFD580; font-size: 18px;">${countdown}</span> seconds...</div>
+                `;
+                countdown--;
+                setTimeout(updateCountdown, 1000);
+            } else {
+                countdownEl.textContent = 'Redirecting now...';
+                setTimeout(() => {
+                    window.location.href = 'https://sites.google.com/view/anni-mukh';
+                }, 500);
+            }
+        }
+        updateCountdown();
+    }
+
+    // Start typing animation with slight delay
+    setTimeout(() => {
+        typeWriter();
+    }, 300);
+    </script>
+</body>
+</html>
